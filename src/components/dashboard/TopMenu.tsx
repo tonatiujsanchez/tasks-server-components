@@ -1,4 +1,5 @@
 import { CiBellOn, CiChat1, CiMenuBurger, CiSearch } from "react-icons/ci"
+import { Counter } from "./Counter"
 
 export const TopMenu = () => {
     return (
@@ -6,6 +7,7 @@ export const TopMenu = () => {
 
             <div className="px-6 flex items-center justify-between space-x-4">
                 <h5 hidden className="text-2xl text-gray-600 font-medium lg:block">Dashboard</h5>
+                <Counter />
                 <button className="w-12 h-16 -mr-2 border-r lg:hidden">
                     <CiMenuBurger size={30} />
                 </button>

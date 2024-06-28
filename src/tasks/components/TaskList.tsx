@@ -13,7 +13,7 @@ export const TaskList = ({ tasks = [] }:Props) => {
     const router = useRouter()
 
     const toggleTask = async(id: string, complete: boolean) => {
-        const updateTodo = await tasksApi.updateTask( id, complete )
+        await tasksApi.updateTask( id, complete )
         router.refresh()
     }
 
