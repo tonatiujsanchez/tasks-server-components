@@ -25,7 +25,7 @@ export const TaskForm = () => {
             return console.log('Description is required')
         }
 
-        await  tasksApi.createTask( description.value )
+        await tasksApi.createTask( description.value )
         form.reset()
         router.refresh()
         
@@ -33,7 +33,7 @@ export const TaskForm = () => {
 
     return (
         <form 
-            className="flex gap-x-2 mb-5 md:w-1/2"
+            className="flex gap-x-2 md:w-1/2"
             onSubmit={ handleSubmitTask }
         >
             <input 

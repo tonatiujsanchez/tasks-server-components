@@ -1,6 +1,7 @@
 'use client'
 import { Task } from "@prisma/client"
-import { IoCheckboxOutline, IoCheckbox } from "react-icons/io5";
+import { IoCheckbox } from "react-icons/io5";
+import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 
 interface Props {
     task: Task
@@ -21,7 +22,7 @@ export const TaskItem = ({ task, toggleTask }:Props) => {
                     {
                         complete
                         ?( <IoCheckbox size={24} /> )
-                        :( <IoCheckboxOutline size={24} /> )
+                        :( <MdOutlineCheckBoxOutlineBlank size={24} /> )
                     }
                 </button>
                  <span className={`${ complete && "text-slate-500 line-through" }`}>{ description }</span>

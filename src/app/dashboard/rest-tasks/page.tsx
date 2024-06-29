@@ -1,4 +1,4 @@
-import { TaskForm, TaskList } from "@/tasks";
+import { TaskList, TasksHeader } from "@/tasks";
 import prisma from "@/lib/prisma";
 
 
@@ -15,7 +15,7 @@ export default async function RestTasksPage() {
 
 	return (
 		<div>
-			<TaskForm />
+			<TasksHeader />
 			<TaskList tasks={ tasks } />
 		</div>
 	);
