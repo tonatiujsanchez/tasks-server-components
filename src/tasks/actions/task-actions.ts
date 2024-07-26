@@ -32,3 +32,15 @@ export const addTask = async(description: string):Promise<Task | { message: stri
         }
     }
 }
+
+export const deleteCompleted = async():Promise<undefined | { message: string } > => {
+    try {
+
+        await prisma.task.deleteMany({ where: { complete: { equals: true } } })
+        revalidatePath('/dashboard/server-tasks')
+    } catch (error) {
+        return {
+            message: "Task don't created"
+        }
+    }
+}
