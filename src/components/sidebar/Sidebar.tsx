@@ -1,6 +1,7 @@
 import { CiLogout } from "react-icons/ci"
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { GoTasklist } from "react-icons/go";
+import { CiServer } from "react-icons/ci";
 import { SidebarItem as ISidebarItem } from "@/interfaces"
 import { SidebarItem } from "@/components"
 import Link from "next/link";
@@ -18,7 +19,12 @@ const sidebarItems:ISidebarItem[] = [
         name: 'Rest tasks',
         path: '/dashboard/rest-tasks',
         icon: <GoTasklist size={30} />
-    }
+    },
+    {
+        name: 'Server tasks',
+        path: '/dashboard/server-tasks',
+        icon: <CiServer size={30} />
+    },
 ]
 
 export function Sidebar() {
@@ -41,14 +47,14 @@ export function Sidebar() {
                 <div className="mt-8 text-center">
                     {/* Next/Image */}
                     <Image
-                        src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
+                        src="https://avatars.githubusercontent.com/u/39894274?v=4"
                         alt="user photo"
                         width={112}
                         height={112}
                         className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
                     />
 
-                    <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">Cynthia J. Watts</h5>
+                    <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">Ton Sanz Jimz</h5>
                     <span className="hidden text-gray-400 lg:block">Admin</span>
                 </div>
 

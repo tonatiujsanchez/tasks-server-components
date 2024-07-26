@@ -2,6 +2,7 @@
 import * as tasksApi from '@/tasks/services/task'
 import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
+import { addTask } from '../actions'
 
 
 interface FromTarget extends HTMLFormElement {
@@ -24,17 +25,31 @@ export const TaskForm = () => {
         if( description.value.trim() === '' ){
             return console.log('Description is required')
         }
-
+        
         await tasksApi.createTask( description.value )
         form.reset()
         router.refresh()
-        
+    }
+    
+
+    const handleSubmitTaskWithAction = async(ev: FormEvent) => {
+        ev.preventDefault()
+
+        const form = ev.target as FromTarget
+
+        const { description } =  form
+
+        if( description.value.trim() === '' ){
+            return console.log('Description is required')
+        }
+        await addTask( description.value )
+        form.reset()
     }
 
     return (
         <form 
             className="flex gap-x-2 md:w-1/2"
-            onSubmit={ handleSubmitTask }
+            onSubmit={ handleSubmitTaskWithAction }
         >
             <input 
                 type="text" 
