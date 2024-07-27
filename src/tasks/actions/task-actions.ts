@@ -3,7 +3,20 @@ import prisma from '@/lib/prisma';
 import { Task } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
+
+export const sleep = async ( seconds:number = 2 ) => {
+
+    return new Promise( resolve =>{
+        setTimeout(() => {
+            resolve(true)
+        }, seconds * 1000)
+    })
+}
+
 export const toggleTask = async( id:string, complete:boolean ):Promise<Task> => {
+
+    await sleep()
+
     const task = await prisma.task.findFirst({ where: { id } })
 
     if( !task ){
@@ -13,8 +26,7 @@ export const toggleTask = async( id:string, complete:boolean ):Promise<Task> => 
     const updateTask = await prisma.task.update({
         where: { id },
         data: { complete }
-    })
-    
+    })    
     revalidatePath('/dashboard/server-tasks')
     return updateTask
 }
