@@ -15,7 +15,7 @@ export const sleep = async ( seconds:number = 2 ) => {
 
 export const toggleTask = async( id:string, complete:boolean ):Promise<Task> => {
 
-    await sleep()
+    // await sleep()
 
     const task = await prisma.task.findFirst({ where: { id } })
 
