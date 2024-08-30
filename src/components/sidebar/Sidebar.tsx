@@ -1,12 +1,13 @@
+import Link from "next/link";
+import Image from "next/image";
 import { CiLogout } from "react-icons/ci"
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { GoTasklist } from "react-icons/go";
 import { CiServer } from "react-icons/ci";
-import { SidebarItem as ISidebarItem } from "@/interfaces"
+import { MdOutlineCookie } from "react-icons/md";
 import { SidebarItem } from "@/components"
-import Link from "next/link";
-import Image from "next/image";
 
+import { SidebarItem as ISidebarItem } from "@/interfaces"
 
 
 const sidebarItems:ISidebarItem[] = [
@@ -24,6 +25,11 @@ const sidebarItems:ISidebarItem[] = [
         name: 'Server tasks',
         path: '/dashboard/server-tasks',
         icon: <CiServer size={30} />
+    },
+    {
+        name: 'Cookies',
+        path: '/dashboard/cookies',
+        icon: <MdOutlineCookie size={30} />
     },
 ]
 
