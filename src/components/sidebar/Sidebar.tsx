@@ -4,6 +4,7 @@ import { CiLogout } from "react-icons/ci"
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { GoTasklist } from "react-icons/go";
 import { CiServer } from "react-icons/ci";
+import { IoShirtOutline } from "react-icons/io5";
 import { MdOutlineCookie } from "react-icons/md";
 import { SidebarItem } from "@/components"
 
@@ -30,6 +31,11 @@ const sidebarItems:ISidebarItem[] = [
         name: 'Cookies',
         path: '/dashboard/cookies',
         icon: <MdOutlineCookie size={30} />
+    },
+    {
+        name: 'Products',
+        path: '/dashboard/products',
+        icon: <IoShirtOutline size={30} />
     },
 ]
 
