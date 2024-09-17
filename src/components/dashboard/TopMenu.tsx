@@ -1,7 +1,32 @@
-import { CiBellOn, CiChat1, CiMenuBurger, CiSearch } from "react-icons/ci"
+import Link from "next/link"
+import { cookies } from "next/headers"
+import { CiChat1, CiMenuBurger, CiSearch, CiShoppingCart } from "react-icons/ci"
 import { Counter } from "./Counter"
+import { COOKIE_CART_KEY } from "@/constants"
+
+
+interface Cart {
+    [id: string]: number
+}
+
+const getTotalProducts = ( cart:Cart ) => {
+    let items = 0
+
+    items = Object.values(cart).reduce(
+        (total, currentValue) => total + currentValue, 0
+    )
+    return items
+}
+
 
 export const TopMenu = () => {
+
+    const cookieStore = cookies()
+    const cart = JSON.parse(cookieStore.get(COOKIE_CART_KEY)?.value ?? '{}')
+
+    const totalProducts = getTotalProducts( cart ) 
+
+
     return (
         <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
 
@@ -28,9 +53,17 @@ export const TopMenu = () => {
                     <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
                         <CiChat1 size={25} />
                     </button>
-                    <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-                        <CiBellOn size={25} />
-                    </button>
+                    <Link 
+                        href={'/dashboard/cart'} 
+                        className="relative flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200"
+                    >
+                        {
+                            totalProducts > 0 && (
+                                <span className="absolute -top-1 -left-3 text-[0.7rem] w-5 h-5 rounded-full text-white bg-sky-600 flex items-center justify-center">{ totalProducts }</span>
+                            )
+                        }
+                        <CiShoppingCart size={25} />
+                    </Link>
                 </div>
             </div>
         </div>
