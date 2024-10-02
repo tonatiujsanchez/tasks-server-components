@@ -1,8 +1,9 @@
 'use client'
-import { WidgetItem } from "@/components/dashboard/WidgetItem";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { FaUser } from "react-icons/fa";
+import { WidgetItem } from "@/components/dashboard/WidgetItem";
+
 
 export default function AuthClientPage() {
 
@@ -11,8 +12,6 @@ export default function AuthClientPage() {
     const userName = session?.user?.name ?? 'No authenticated'
     const userEmail = session?.user?.name ?? 'No authenticated'
     const userAvatarUrl = session?.user?.image
-
-    console.log(status)
 
     if( status === 'loading' ){
         return (
