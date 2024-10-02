@@ -1,17 +1,24 @@
 import Link from "next/link";
 import Image from "next/image";
+
 import { CiLogout } from "react-icons/ci"
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { FaUser } from 'react-icons/fa'
 import { GoTasklist } from "react-icons/go";
 import { CiServer } from "react-icons/ci";
 import { IoShirtOutline } from "react-icons/io5";
 import { MdOutlineCookie } from "react-icons/md";
+import { FaUserAstronaut } from "react-icons/fa6";
+
 import { SidebarItem } from "@/components"
+
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import { SidebarItem as ISidebarItem } from "@/interfaces"
 
 
-const sidebarItems:ISidebarItem[] = [
+const sidebarItems: ISidebarItem[] = [
     {
         name: 'Dashboard',
         path: '/dashboard',
@@ -37,9 +44,20 @@ const sidebarItems:ISidebarItem[] = [
         path: '/dashboard/products',
         icon: <IoShirtOutline size={30} />
     },
+    {
+        name: 'Auth client',
+        path: '/dashboard/auth-client',
+        icon: <FaUserAstronaut size={30} />
+    },
 ]
 
-export function Sidebar() {
+
+export async function Sidebar() {
+
+    const session = await getServerSession(authOptions)
+    const userName = session?.user?.name ?? 'No authenticated'
+    const userAvatarUrl = session?.user?.image
+
     return (
         <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
             <div>
@@ -58,24 +76,29 @@ export function Sidebar() {
 
                 <div className="mt-8 text-center">
                     {/* Next/Image */}
-                    <Image
-                        src="https://avatars.githubusercontent.com/u/39894274?v=4"
-                        alt="user photo"
-                        width={112}
-                        height={112}
-                        className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
-                    />
-
-                    <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">Ton Sanz Jimz</h5>
+                    {userAvatarUrl ? (
+                            <Image
+                                src={userAvatarUrl}
+                                alt={userName}
+                                width={112}
+                                height={112}
+                                className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
+                            />
+                        ) : (
+                            <div className="h-28 w-28 rounded-full bg-indigo-100 flex items-center justify-center mx-auto">
+                                <FaUser className="h-14 w-14 text-indigo-600" />
+                            </div>
+                        )}
+                    <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{userName}</h5>
                     <span className="hidden text-gray-400 lg:block">Admin</span>
                 </div>
 
                 <ul className="space-y-2 tracking-wide mt-8">
                     {
-                        sidebarItems.map( sidebarItem => (
+                        sidebarItems.map(sidebarItem => (
                             <SidebarItem
-                                key={ sidebarItem.path }
-                                { ...sidebarItem }
+                                key={sidebarItem.path}
+                                {...sidebarItem}
                             />
                         ))
                     }
